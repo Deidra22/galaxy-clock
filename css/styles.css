@@ -18,6 +18,10 @@ body{
     text-align:center;
 }
 
+.head{
+    padding-bottom:10px
+}
+
 .alarm_box{
     border-radius:8px;
     margin-top:50px;
@@ -35,7 +39,7 @@ body{
 .bg_box{
     background-color:#e6e6ff;
     opacity:0.8;
-    border: thin solid #000000;
+    /* border: thin solid #000000; */
     border-radius:8px;
     margin: 5px;
     padding:0px;
@@ -50,5 +54,10 @@ body{
 }
 
 .button{
+    border: thin solid #000000;
+    background-color: #e6e6ff;
+    border-radius:8px;
+    height: 40px;
+    width: 80px;
 }
 

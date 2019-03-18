@@ -8,20 +8,18 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Galaxy Clock!</title>
 </head>
-<body>
+<body onload="clock()">
     
     <div class="container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-sm-offset-3 boxes">
-                    <h1>Galaxy Time!</h1>
+                    <h1 class="head">Galaxy Time!</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-sm-offset-3 boxes clock">
-                    <span id="hour">02:</span>
-                    <span id="minute">30:</span>
-                    <span id="second">24</span>
+                    <h2 id="galaxyClock"></h2>
                 </div>
             </div>
             <div class="row alarm_box">
@@ -53,8 +51,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <button class="button col-md-offset-6">Set Alarm</button>
+                <div class="col-sm-12 col-md-12">
+                    <button class="button col-md-offset-5">Set Alarm</button>
                 </div>
             </div>
         </div>
