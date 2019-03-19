@@ -1,14 +1,33 @@
+//Date
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth()+1; //January is 0!
+let yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+} 
+
+if(mm<10) {
+    mm = '0'+mm
+} 
+
+today = mm + '/' + dd + '/' + yyyy;
+document.getElementById('date').innerHTML = today;
+
+
+//Clock
 function clock(){
-    var today = new Date();
-    var hr = today.getHours();
-    var min = today.getMinutes();
-    var sec = today.getSeconds();
+    let today = new Date();
+    let hr = today.getHours();
+    let min = today.getMinutes();
+    let sec = today.getSeconds();
     min = checkTime(min);
     sec = checkTime(sec);
     document.getElementById('galaxyClock').innerHTML = 
     hr + ":" + min + ":" + sec;
 
-    var t = setTimeout(clock, 500);
+    let t = setTimeout(clock, 500);
 
 
 function checkTime(i){
