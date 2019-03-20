@@ -9,12 +9,19 @@ body{
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
 .boxes{
     background-color:#e6e6ff;
-    opacity:0.8;
-    border-radius:8px;
-    margin-top:50px;
-    text-align:center;
+    opacity: 0.8;
+    border-radius: 8px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 2px;
 
 }
 
@@ -24,15 +31,10 @@ body{
 
 #date{
     border-top: thin dashed black;
-    margin-top: 10px;
-}
-
-.alarm_box{
-
 }
 
 .button{
-    width: 90px;
-
+    background-color:#396069;
+    border-radius: 8px;
 }
 
