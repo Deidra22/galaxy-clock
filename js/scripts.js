@@ -52,3 +52,7 @@ function checkTime(i){
         hr + ":" + min + ":" + sec + "AM";;
     }
 }
+
+function alarmButton(button){
+    let  = 
+}
