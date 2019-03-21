@@ -30,6 +30,7 @@ function clock(){
     let t = setTimeout(clock, 500);
 
 
+
 function checkTime(i){
     if (i < 10) {i = "0" + i};
     return i;
@@ -51,8 +52,57 @@ function checkTime(i){
         document.getElementById('galaxyClock').innerHTML = 
         hr + ":" + min + ":" + sec + "AM";;
     }
+    
+
+//Alarm
+
+    const alarmSound = new Audio();
+    alarmSound.src = 'audio/Alarm Clock.mp3';
+
+function setAlarm(button){
+    let millsec = document.getElementById('alarmTime').valueAsNumber;
+        if(isNaN(millsec)){
+            alert('Invalid Date');
+        }
+
+
+    let alarm = new Date(millsec);
+
+    let AlarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(), alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
+
+    let diffMillSec = alarmTime.getTime() - (new Date()).getTime();
+
+        if(diffMillSec < 0){
+            alert('Specified time has passed!')
+            return;
+        }
+    
+        setTimeout(initAlarm, diffMillSec);
+        button.innerText = 'Cancel Alarm';
+        button.setAttribute('onclick', 'cancelAlarm(this);');
+
+    function cancelAlarm(button){
+        button.innerText = 'Set Alarm';
+        button.serAttribute('Onclick', 'setAlarm(this);');
+    }
+
 }
 
-function alarmButton(button){
-    let  = 
-}
+    function initAlarm(){
+        alarmSound.play();
+        document.getElementById('alarmBtns').style.display = '';
+    }
+
+    function stopAlarm(){
+        alarmSound.pause();
+        alarmSound.currentTime = 0;
+        document.getElementById('alarmBtns').style.display = 'none';
+    }
+
+}  
+
+
+// const ul = document.createElementByTagName('ul');
+//     const li = document.createElement('li');
+//     ul.appendChild(li);
+

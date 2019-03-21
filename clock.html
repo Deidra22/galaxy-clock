@@ -27,12 +27,15 @@
                 <div class="alarm_box boxes">
                     <label for="alarmDates">When do you need me?</label>
                     <input type="datetime-local" id="alarmTime" name="alarmTime"> 
-                    <button id="alarmButton" class="button" type="button">Set Alarm</button>
+                    <button id="alarmButton" class="button" type="button" onclick="setAlarm">Set Alarm</button>
+                </div>
+                <div id="alarmBtns" style="display:none;">
+                    <button onclick="stopAlarm();">Stop Alarm</button>
+                
                 </div>
             </div>
             <div class="row">
                 <div class="boxes">
-                    <p>This is where the three alarms will place when they are set. They will be able to be deleted down here.</p>
                     
                 </div>
             </div>
