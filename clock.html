@@ -27,7 +27,10 @@
                 <div class="alarm_box boxes">
                     <label for="alarmDates">When do you need me?</label>
                     <input type="datetime-local" id="alarmTime" name="alarmTime"> 
-                    <button id="alarmButton" class="button" type="button" onclick="setAlarm">Set Alarm</button>
+                    <!-- <button id="alarmButton" class="button" type="button" onclick="setAlarm" >Set Alarm</button> -->
+                    <button id="alarmButton" class="button" onclick="createAlarm();">
+                        Set Alarm
+                    </button>
                 </div>
                 <div id="alarmBtns" style="display:none;">
                     <button onclick="stopAlarm();">Stop Alarm</button>
@@ -36,6 +39,9 @@
             </div>
             <div class="row">
                 <div class="boxes">
+                    <ul  id="currentAlarms">
+
+                    </ul>
                     
                 </div>
             </div>
