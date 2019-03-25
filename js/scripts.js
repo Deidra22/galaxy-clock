@@ -8,8 +8,8 @@ const alarmButton = document.getElementById('alarmButton'),
     alarmSound = new Audio();
 
 alarmSound.src = 'audio/Alarm Clock.mp3';
-const ul = document.getElementById('currentAlarms');
-const li = document.getElementById('currentAlarms');
+// const ul = document.getElementById('currentAlarms');
+// const li = document.getElementById('currentAlarms');
 
 if(dd<10) {
     dd = '0'+dd
@@ -107,13 +107,28 @@ function stopAlarm(){
 }
 
 alarmButton.addEventListener('click', alarmList);
-    function alarmList(){
-        const li = document.createElement('li');
-        console.log (ul);
-        ul.appendChild(li);
-    }
-    li.innerHTML = ul.value;
-    li.value = '';
+
+
+function addItem(){
+    let ul = document.getElementById("alarmList");
+    let candidate = document.getElementById("candidate");
+    let li = document.createElement("li");
+    li.setAttribute('id',candidate.value);
+    li.appendChild(document.createTextNode(candidate.value));
+    ul.appendChild(li);
+}
+
+    // function alarmList(){
+    //     let list = [''];
+    //     const li = document.createElement('li');
+    //     const inputAlarm = document.getElementById();
+    //     ul.appendChild(li);
+    // }
+    // li.innerHTML = ul.value;
+    // li.value = 'list';
+    //     if(list.length === 0){
+    //         var.push(somevalue);
+    //     }
 
     
    // const li = document.createElement('li');
