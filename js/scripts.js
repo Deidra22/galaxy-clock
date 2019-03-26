@@ -1,15 +1,20 @@
-//Date
+//Date variables
 let today = new Date();
 let dd = today.getDate();
 let mm = today.getMonth()+1; //January is 0!
 let yyyy = today.getFullYear();
+
+//Alarm variables
 const setAlarm = document.getElementById('alarmButton');
+const alarmName = document.getElementById('alarmName');
+const alarmTime = document.getElementById('alarmTime');
+const currentAlarms = document.getElementById('currentAlarms')
+
 const alarmButton = document.getElementById('alarmButton'),
     alarmSound = new Audio();
 
+//Audio
 alarmSound.src = 'audio/Alarm Clock.mp3';
-// const ul = document.getElementById('currentAlarms');
-// const li = document.getElementById('currentAlarms');
 
 if(dd<10) {
     dd = '0'+dd
@@ -23,7 +28,7 @@ today = mm + '/' + dd + '/' + yyyy;
 document.getElementById('date').innerHTML = today;
 
 
-//Clock
+//Clock function
 function clock(){
     let today = new Date();
     let hr = today.getHours();
@@ -59,41 +64,38 @@ function checkTime(i){
         document.getElementById('galaxyClock').innerHTML = 
         hr + ":" + min + ":" + sec + "AM";
     }
-    
-
-//Alarm
 
 }
 
+//Alarm
 function cancelAlarm(){
     alarmButton.innerText = 'Set Alarm';
     alarmButton.setAttribute('Onclick', 'setAlarm(this);');
 }
 
+// function createAlarm (){
+//     let millsec = document.getElementById('alarmTime').valueAsNumber;
+//         if(isNaN(millsec)){
+//             alert('Invalid Date');
+//         }
 
-function createAlarm (){
-    let millsec = document.getElementById('alarmTime').valueAsNumber;
-        if(isNaN(millsec)){
-            alert('Invalid Date');
-        }
 
+//     let alarm = new Date(millsec);
 
-    let alarm = new Date(millsec);
+//     let alarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(), alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
 
-    let alarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(), alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
+//     let diffMillSec = alarmTime.getTime() - (new Date()).getTime();
 
-    let diffMillSec = alarmTime.getTime() - (new Date()).getTime();
-
-        if(diffMillSec < 0){
-            alert('Specified time has passed!')
-            return;
-        }
+//         if(diffMillSec < 0){
+//             alert('Specified time has passed!')
+//             return;
+//         }
     
-        setTimeout(initAlarm, diffMillSec);
-        alarmButton.innerText = 'Cancel Alarm';
-        alarmButton.setAttribute('onclick', 'cancelAlarm(this);');
+//         setTimeout(initAlarm, diffMillSec);
+//         alarmButton.innerText = 'Cancel Alarm';
+//         alarmButton.setAttribute('onclick', 'cancelAlarm(this);');
 
-}
+// }
 
 function initAlarm(){
     alarmSound.play();
@@ -106,31 +108,21 @@ function stopAlarm(){
     document.getElementById('alarmBtns').style.display = 'none';
 }
 
-alarmButton.addEventListener('click', alarmList);
+//Listener
+alarmButton.addEventListener('click', createAlarm);
 
+function createAlarm(){
+    const name = alarmName.value;
+    const time = alarmTime.value;
 
-function addItem(){
-    let ul = document.getElementById("alarmList");
-    let candidate = document.getElementById("candidate");
-    let li = document.createElement("li");
-    li.setAttribute('id',candidate.value);
-    li.appendChild(document.createTextNode(candidate.value));
-    ul.appendChild(li);
+    if (!name || !time) {
+        alert("Please enter a valid alarm name and time!")
+        return
+    };
+
+    const li = document.createElement('li');
+
+    li.innerHTML = `<h3>${alarmName.value}</h3>
+                    <span>${alarmTime.value}</span>`
+    currentAlarms.appendChild(li);
 }
-
-    // function alarmList(){
-    //     let list = [''];
-    //     const li = document.createElement('li');
-    //     const inputAlarm = document.getElementById();
-    //     ul.appendChild(li);
-    // }
-    // li.innerHTML = ul.value;
-    // li.value = 'list';
-    //     if(list.length === 0){
-    //         var.push(somevalue);
-    //     }
-
-    
-   // const li = document.createElement('li');
-    
-
