@@ -5,73 +5,75 @@ let mm = today.getMonth()+1; //January is 0!
 let yyyy = today.getFullYear();
 
 //Alarm variables
-const setAlarm = document.getElementById('alarmButton');
+// const alarms = document.getElementById('alarmButton');
 const alarmName = document.getElementById('alarmName');
 const alarmTime = document.getElementById('alarmTime');
 const currentAlarms = document.getElementById('currentAlarms')
+const galaxyClock = document.getElementById('galaxyClock');
 
-const alarmButton = document.getElementById('alarmButton'),
-    alarmSound = new Audio();
 
-//Audio
-alarmSound.src = 'audio/Alarm Clock.mp3';
+//Listener
+alarmButton.addEventListener('click', createAlarm);
 
+//Date
 if(dd<10) {
     dd = '0'+dd
 } 
-
 if(mm<10) {
     mm = '0'+mm
 } 
-
 today = mm + '/' + dd + '/' + yyyy;
 document.getElementById('date').innerHTML = today;
 
 
 //Clock function
+
 function clock(){
-    let today = new Date();
-    let hr = today.getHours();
-    let min = today.getMinutes();
-    let sec = today.getSeconds();
-    min = checkTime(min);
-    sec = checkTime(sec);
-    document.getElementById('galaxyClock').innerHTML = 
-    hr + ":" + min + ":" + sec;
-
-    let t = setTimeout(clock, 500);
-
-
-
-function checkTime(i){
-    if (i < 10) {i = "0" + i};
-    return i;
+    setInterval(() => {
+        galaxyClock.innerText = new Date().toLocaleTimeString()
+    }, 1000);
 }
-    if (hr > 12){
-        hr = hr - 12;
-        if (hr == 12){
-            hr = checkTime(hr);
-            document.getElementById('galaxyclock').innerHTML = 
-            hr + ":" + min + ":" + sec + "AM";
-        }
-        else {
-            hr = checkTime(hr);
-            document.getElementById('galaxyClock').innerHTML = 
-            hr + ":" + min + ":" + sec + "PM";
-        }
-    }
-    else {
-        document.getElementById('galaxyClock').innerHTML = 
-        hr + ":" + min + ":" + sec + "AM";
-    }
+// function clock(){
+//     let today = new Date();
+//     let hr = today.getHours();
+//     let min = today.getMinutes();
+//     let sec = today.getSeconds();
+//     min = checkTime(min);
+//     sec = checkTime(sec);
+//     document.getElementById('galaxyClock').innerHTML = 
+//     hr + ":" + min + ":" + sec;
 
-}
+//     let t = setTimeout(clock, 500);
+
+// function checkTime(i){
+//     if (i < 10) {i = "0" + i};
+//     return i;
+// }
+//     if (hr > 12){
+//         hr = hr - 12;
+//         if (hr == 12){
+//             hr = checkTime(hr);
+//             document.getElementById('galaxyclock').innerHTML = 
+//             hr + ":" + min + ":" + sec + "AM";
+//         }
+//         else {
+//             hr = checkTime(hr);
+//             document.getElementById('galaxyClock').innerHTML = 
+//             hr + ":" + min + ":" + sec + "PM";
+//         }
+//     }
+//     else {
+//         document.getElementById('galaxyClock').innerHTML = 
+//         hr + ":" + min + ":" + sec + "AM";
+//     }
+
+// }
 
 //Alarm
-function cancelAlarm(){
-    alarmButton.innerText = 'Set Alarm';
-    alarmButton.setAttribute('Onclick', 'setAlarm(this);');
-}
+// function cancelAlarm(){
+//     alarmButton.innerText = 'Set Alarm';
+//     alarmButton.setAttribute('Onclick', 'setAlarm(this);');
+// }
 
 // function createAlarm (){
 //     let millsec = document.getElementById('alarmTime').valueAsNumber;
@@ -97,32 +99,116 @@ function cancelAlarm(){
 
 // }
 
-function initAlarm(){
-    alarmSound.play();
-    document.getElementById('alarmBtns').style.display = '';
+// function initAlarm(){
+//     //Audio
+// alarmSound.src = 'audio/Alarm Clock.mp3';
+
+//     alarmSound.play();
+//     document.getElementById('alarmBtns').style.display = '';
+// }
+
+// function stopAlarm(){
+//     alarmSound.pause();
+//     alarmSound.currentTime = 0;
+//     document.getElementById('alarmBtns').style.display = 'none';
+// }
+
+
+function createAlarm(){
+    const now = new Date();
+    const name = alarmName.value;
+    const time = alarmTime.value;
+    const reqTime = new Date (time);
+
+    const incompInputs = !name || !time;
+    const invTime = now > reqTime;
+
+    if (incompInputs || invTime) {
+        alert("Please use a valid alarm name and time.");
+        return;
+    }
+
+    const date = reqTime.toDateString();
+    const hours = reqTime.getHours();
+    const minutes = reqTime.getMinutes();
+    const meridian = reqTime.getHours() > 11;
+    const simpHours = (hours > 12 ? hours - 12 : hours);
+    const simpTime = (simpHours ? simpHours : 12) + ":" + minutes + " " + (!meridian ? "AM" : "PM");
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+        <h3>${name}</h3>
+        <span>${date} - ${simpTime}</span>
+    `;
+    
+    currentAlarms.appendChild(li);
+    
+    const button = document.createElement('button');
+    button.innerText = 'X';
+    button.style.backgroundColor = 'red';
+    button.style.color = 'white';
+
+    li.appendChild(button);
+
+    // setAlert(now, reqTime, name, button);
+ 
 }
 
+function setAlert(currentTime, reqTime, name, button) {
+    const difference = reqTime - currentTime;
+    // const alarms = document.getElementById('alarmButton');
+
+    // alarms.push({ name, reqTime});
+
+    // const alarmButton = document.getElementById('alarmButton'),
+    // alarmSound = new Audio();
+
+    // window.localStorage.setItem("alarms", JSON.stringify(alarms));
+
+    const timeout = setTimeout(() => {
+        alert(`Time for ${name}`);
+    }, difference);
+
+    button.addEventListener("click", function() {
+       clearTimeout(timeout);
+       this.parentNode.remove();
+    });
+
+}
+
+  //Audio
+  function audio(){
+   const alarmSound = new Audio();
+  
+    alarmSound.src = 'audio/Alarm Clock.mp3';
+
+    alarmSound.play();
+    document.getElementById('alarmBtns').style.display = '';
+  }
+  
 function stopAlarm(){
     alarmSound.pause();
     alarmSound.currentTime = 0;
     document.getElementById('alarmBtns').style.display = 'none';
 }
 
-//Listener
-alarmButton.addEventListener('click', createAlarm);
 
-function createAlarm(){
-    const name = alarmName.value;
-    const time = alarmTime.value;
+// //Audio
+// alarmSound.src = 'audio/Alarm Clock.mp3';
 
-    if (!name || !time) {
-        alert("Please enter a valid alarm name and time!")
-        return
-    };
+// const alarmButton = document.getElementById('alarmButton'),
+//     alarmSound = new Audio();
 
-    const li = document.createElement('li');
+//      //Audio
+// alarmSound.src = 'audio/Alarm Clock.mp3';
 
-    li.innerHTML = `<h3>${alarmName.value}</h3>
-                    <span>${alarmTime.value}</span>`
-    currentAlarms.appendChild(li);
-}
+// alarmSound.play();
+// document.getElementById('button').style.display = '';
+
+// function initAlarm(){
+//     //Audio
+// alarmSound.src = 'audio/Alarm Clock.mp3';
+
+//     alarmSound.play();
+//     document.getElementById('alarmBtns').style.display = '';
+// }
