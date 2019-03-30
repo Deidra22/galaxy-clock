@@ -10,6 +10,8 @@ const alarmName = document.getElementById('alarmName');
 const alarmTime = document.getElementById('alarmTime');
 const currentAlarms = document.getElementById('currentAlarms')
 const galaxyClock = document.getElementById('galaxyClock');
+// const alarmButton = document.getElementById('alarmButton'),
+//     alarmSound = new Audio();
 
 
 //Listener
@@ -150,20 +152,12 @@ function createAlarm(){
 
     li.appendChild(button);
 
-    // setAlert(now, reqTime, name, button);
+    setAlert( alarmSound, now, reqTime, name, button);
  
 }
 
-function setAlert(currentTime, reqTime, name, button) {
+function setAlert(alarmSound, currentTime, reqTime, name, button) {
     const difference = reqTime - currentTime;
-    // const alarms = document.getElementById('alarmButton');
-
-    // alarms.push({ name, reqTime});
-
-    // const alarmButton = document.getElementById('alarmButton'),
-    // alarmSound = new Audio();
-
-    // window.localStorage.setItem("alarms", JSON.stringify(alarms));
 
     const timeout = setTimeout(() => {
         alert(`Time for ${name}`);
@@ -174,17 +168,23 @@ function setAlert(currentTime, reqTime, name, button) {
        this.parentNode.remove();
     });
 
-}
-
-  //Audio
-  function audio(){
-   const alarmSound = new Audio();
+    alarmSound = new Audio();
   
     alarmSound.src = 'audio/Alarm Clock.mp3';
 
     alarmSound.play();
     document.getElementById('alarmBtns').style.display = '';
-  }
+}
+
+  //Audio
+//   function audio(){
+//     alarmSound = new Audio();
+  
+//     alarmSound.src = 'audio/Alarm Clock.mp3';
+
+//     alarmSound.play();
+//     document.getElementById('alarmBtns').style.display = '';
+//   }
   
 function stopAlarm(){
     alarmSound.pause();
