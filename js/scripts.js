@@ -1,98 +1,96 @@
-//Date
+const storedAlarms = window.localStorage.getItem("alarms");
+const alarms = typeof(storedAlarms) === "Array" ? storedAlarms : [];
+
+window.localStorage.setItem("alarms", JSON.stringify(alarms));
+
+//Clock function
+function clock(){
+    setInterval(() => {
+        galaxyClock.innerText = new Date().toLocaleTimeString()
+    }, 1000);
+}
+
+//Date variables
 let today = new Date();
 let dd = today.getDate();
 let mm = today.getMonth()+1; //January is 0!
 let yyyy = today.getFullYear();
-const setAlarm = document.getElementById('alarmButton');
-const alarmButton = document.getElementById('alarmButton'),
-    alarmSound = new Audio();
 
-alarmSound.src = 'audio/Alarm Clock.mp3';
-const ul = document.getElementById('currentAlarms');
-const li = document.getElementById('currentAlarms');
-
+//Date
 if(dd<10) {
     dd = '0'+dd
 } 
-
 if(mm<10) {
     mm = '0'+mm
 } 
-
 today = mm + '/' + dd + '/' + yyyy;
 document.getElementById('date').innerHTML = today;
 
+//Audio File
+let alarmSound = new Audio();
+alarmSound.src = 'audio/Alarm Clock.mp3';
 
-//Clock
-function clock(){
-    let today = new Date();
-    let hr = today.getHours();
-    let min = today.getMinutes();
-    let sec = today.getSeconds();
-    min = checkTime(min);
-    sec = checkTime(sec);
-    document.getElementById('galaxyClock').innerHTML = 
-    hr + ":" + min + ":" + sec;
+//Alarm Variables
+let alarmName = document.getElementById('alarmName');
+let alarmTime = document.getElementById('alarmTime');
+let listedAlarms = document.getElementById('listedAlarms');
+let galaxyClock = document.getElementById('galaxyClock');
+let alarmButton = document.getElementById('alarmButton');
 
-    let t = setTimeout(clock, 500);
+//Setting the Alarm
+function makeAlarm(){
+    const now = new Date();
+    const name = alarmName.value;
+    const time = alarmTime.value;
+    const requestedTime = new Date(time);
 
+    const incompleteInputs = !name || !time;
+    const invalidTime = now > requestedTime;
 
-
-function checkTime(i){
-    if (i < 10) {i = "0" + i};
-    return i;
-}
-    if (hr > 12){
-        hr = hr - 12;
-        if (hr == 12){
-            hr = checkTime(hr);
-            document.getElementById('galaxyclock').innerHTML = 
-            hr + ":" + min + ":" + sec + "AM";
-        }
-        else {
-            hr = checkTime(hr);
-            document.getElementById('galaxyClock').innerHTML = 
-            hr + ":" + min + ":" + sec + "PM";
-        }
+    if (incompleteInputs || invalidTime) {
+        alert("Please be sure to provide a valid name and time.");
+        return;
     }
-    else {
-        document.getElementById('galaxyClock').innerHTML = 
-        hr + ":" + min + ":" + sec + "AM";
-    }
-    
 
-//Alarm
+    const date = requestedTime.toDateString();
+    const hours = requestedTime.getHours();
+    const minutes = requestedTime.getMinutes();
+    const meridian = requestedTime.getHours() > 11;
+    const simplifiedHours = (hours > 12 ? hours - 12 : hours);
+    const simplifiedTime = (simplifiedHours ? simplifiedHours : 12) + ":" + minutes + " " + (!meridian ? "AM" : "PM");
+    const li = document.createElement("li");
 
+    li.innerHTML = `
+        <h3>${name}<h3/>
+        <span>${date} - ${simplifiedTime}</span>
+    `;
+
+    listedAlarms.appendChild(li);
+    const button = document.createElement("button");
+    button.innerText = "X";
+    button.style.backgroundColor = "red";
+    button.style.color = "white";
+
+    li.appendChild(button);
+
+    setAlarm(now, requestedTime, name, button);
 }
 
-function cancelAlarm(){
-    alarmButton.innerText = 'Set Alarm';
-    alarmButton.setAttribute('Onclick', 'setAlarm(this);');
-}
+function setAlarm(currentTime, requestedTime, name, button) {
+    const difference = requestedTime - currentTime;
 
+    alarms.push({ name, requestedTime});
 
-function createAlarm (){
-    let millsec = document.getElementById('alarmTime').valueAsNumber;
-        if(isNaN(millsec)){
-            alert('Invalid Date');
-        }
+    window.localStorage.setItem("alarms", JSON.stringify(alarms));
 
+    const timeout = setTimeout(() => {
+        initAlarm();
+    }, difference);
 
-    let alarm = new Date(millsec);
-
-    let alarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(), alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
-
-    let diffMillSec = alarmTime.getTime() - (new Date()).getTime();
-
-        if(diffMillSec < 0){
-            alert('Specified time has passed!')
-            return;
-        }
-    
-        setTimeout(initAlarm, diffMillSec);
-        alarmButton.innerText = 'Cancel Alarm';
-        alarmButton.setAttribute('onclick', 'cancelAlarm(this);');
-
+    button.addEventListener("click", function() {
+       clearTimeout(timeout);
+       this.parentNode.remove();
+    });
 }
 
 function initAlarm(){
@@ -103,19 +101,5 @@ function initAlarm(){
 function stopAlarm(){
     alarmSound.pause();
     alarmSound.currentTime = 0;
-    document.getElementById('alarmBtns').style.display = 'none';
+    document.getElementById('stop');
 }
-
-alarmButton.addEventListener('click', alarmList);
-    function alarmList(){
-        const li = document.createElement('li');
-        console.log (ul);
-        ul.appendChild(li);
-    }
-    li.innerHTML = ul.value;
-    li.value = '';
-
-    
-   // const li = document.createElement('li');
-    
-

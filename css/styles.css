@@ -19,10 +19,8 @@ body{
     background-color:#e6e6ff;
     opacity: 0.8;
     border-radius: 8px;
-    margin-top: 50px;
+    margin: 30px;
     text-align: center;
-    padding: 2px;
-
 }
 
 #galaxyClock{
@@ -31,6 +29,10 @@ body{
 
 #date{
     border-top: thin dashed black;
+}
+
+.alarm_box{
+    height: 80px;
 }
 
 .button{

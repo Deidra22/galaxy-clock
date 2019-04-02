@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Galaxy Clock!</title>
 </head>
+
 <body onload="clock()">
-    
+
     <div class="container-fluid">
         <div class="container">
             <div class="row">
@@ -25,24 +27,25 @@
             </div>
             <div class="row">
                 <div class="alarm_box boxes">
-                    <label for="alarmDates">When do you need me?</label>
-                    <input type="datetime-local" id="alarmTime" name="alarmTime"> 
-                    <!-- <button id="alarmButton" class="button" type="button" onclick="setAlarm" >Set Alarm</button> -->
-                    <button id="alarmButton" class="button" onclick="createAlarm();">
+                    <h2>When do you need me?</h2>
+                    <input type="text" id="alarmName">
+                    <input type="datetime-local" id="alarmTime" name="alarmTime">
+                    <button onClick="makeAlarm();" id="alarmButton" class="button">
                         Set Alarm
                     </button>
-                </div>
-                <div id="alarmBtns" style="display:none;">
-                    <button onclick="stopAlarm();">Stop Alarm</button>
-                
                 </div>
             </div>
             <div class="row">
                 <div class="boxes">
-                    <ul  id="currentAlarms">
+                    <h2>My Alarms:</h2>
+                    <ul id="listedAlarms">
 
                     </ul>
-                    
+                </div>
+            </div>
+            <div id="stop" class="row">
+                <div id="alarmBtns" style="display:none;">
+                    <button onClick="stopAlarm();" class="button">Stop Alarm</button>
                 </div>
             </div>
         </div>
@@ -51,6 +54,7 @@
 
 
     <!-- SCRIPT LINK -->
-    <script src= "js/scripts.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
+
 </html>
