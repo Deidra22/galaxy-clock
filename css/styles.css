@@ -12,14 +12,13 @@ body{
 .container{
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 40%;
 }
 
 .boxes{
-    background-color:#e6e6ff;
-    opacity: 0.8;
+    background-color:rgba(230, 230, 250, 0.8);
     border-radius: 8px;
-    margin: 30px;
+    margin: 25px;
     text-align: center;
 }
 
@@ -31,8 +30,37 @@ body{
     border-top: thin dashed black;
 }
 
-.alarm_box{
+#alarmName{
+    width: 100px;
+}
+
+#listedAlarms{
+    text-align: left;
+}
+
+@media only screen and (max-width: 1239px){
+    .alarm_box{
+        height: 110px;
+    }
+}
+@media only screen and (max-width: 850px){
+    .alarm_box{
+        height: 155px;
+    }
+}
+@media only screen and (max-width: 660px){
+    .alarm_box{
+        height: 180px;
+        font-size: 15px;
+    }
+    #alarmTime{
+        width: 125px;
+    }
+}
+
+.alarm_box2{
     height: 80px;
+    text-align: center;
 }
 
 .button{
