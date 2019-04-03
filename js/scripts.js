@@ -70,6 +70,7 @@ function makeAlarm(){
     button.innerText = "X";
     button.style.backgroundColor = "red";
     button.style.color = "white";
+    button.style.borderRadius = "8px";
 
     li.appendChild(button);
 
