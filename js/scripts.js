@@ -61,7 +61,7 @@ function makeAlarm(){
     const li = document.createElement("li");
 
     li.innerHTML = `
-        <h3>${name}<h3/>
+        <span>${name}</span>:
         <span>${date} - ${simplifiedTime}</span>
     `;
 
