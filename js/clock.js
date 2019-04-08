@@ -22,11 +22,7 @@
         today = `${month}/${day}/${year}`;
         document.getElementById('date').innerHTML = today;
 
-        galaxyClock.innerText = new Date().toLocaleTimeString();
-
-        setInterval(() => {
-            galaxyClock.innerText = new Date().toLocaleTimeString();
-        }, 1000);
+        setInterval(() => setCurrentTime, 1000);
     };
 
     const clearFields = function() {
@@ -111,6 +107,8 @@
         storeAlarms(currentAlarms);
     };
 
+    const setCurrentTime = () => galaxyClock.innerText = new Date().toLocaleTimeString();
+
     const stopAlarm = function() {
         removeAlarm(currentAlarm, currentNode);
         alarmSound.pause();
@@ -125,7 +123,10 @@
     };
 
     // Event Listeners
-    document.addEventListener('DOMContentLoaded', clock, false);
+    document.addEventListener('DOMContentLoaded', () => {
+        clock();
+        setCurrentTime();
+    }, false);
 
     alarmButton.addEventListener('click', () => {
         createAlarm(alarmName.value, alarmTime.value, true);
