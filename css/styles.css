@@ -9,17 +9,23 @@ body{
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     width: 40%;
 }
 
-.boxes{
+.boxes {
     background-color:rgba(230, 230, 250, 0.8);
     border-radius: 8px;
     margin: 25px;
     text-align: center;
+    padding: 15px;
+}
+
+.boxes h1,
+.boxes h2 {
+    margin-top: 0;
 }
 
 #galaxyClock{
@@ -36,6 +42,12 @@ body{
 
 #listedAlarms{
     text-align: left;
+}
+
+.cancel-button {
+    background-color: red;
+    color: white;
+    border-radius: 8px;
 }
 
 @media only screen and (max-width: 1239px){
@@ -58,12 +70,17 @@ body{
     }
 }
 
-.alarm_box2{
+.alarm_box2 {
     height: 80px;
     text-align: center;
+    display: none;
 }
 
-.button{
+.alarm_box2.show {
+    display: block;
+}
+
+.button {
     background-color:#396069;
     border-radius: 8px;
 }

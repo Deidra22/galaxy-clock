@@ -10,8 +10,7 @@
     <title>Galaxy Clock!</title>
 </head>
 
-<body onload="clock()">
-
+<body>
     <div class="container-fluid">
         <div class="container">
             <div class="row">
@@ -28,9 +27,9 @@
             <div class="row">
                 <div class="alarm_box boxes">
                     <h2>When do you need me?</h2>
-                    <input type="text" id="alarmName">
+                    <input type="text" id="alarmName" placeholder="Alarm name">
                     <input type="datetime-local" id="alarmTime" name="alarmTime">
-                    <button onClick="makeAlarm();" id="alarmButton" class="button">
+                    <button id="alarmButton" class="button">
                         Set Alarm
                     </button>
                 </div>
@@ -44,8 +43,8 @@
                 </div>
             </div>
             <div id="stop" class="row">
-                <div id="alarmBtns" class="alarm_box2" style="display:none;">
-                    <button id="blinker" onClick="stopAlarm();" class="btn btn-danger btn-lg">Stop Alarm</button>
+                <div id="alarmBtns" class="alarm_box2">
+                    <button id="blinker" class="btn btn-danger btn-lg">Stop Alarm</button>
                 </div>
             </div>
         </div>
@@ -54,7 +53,8 @@
 
 
     <!-- SCRIPT LINK -->
-    <script src="js/scripts.js"></script>
+    <!-- <script src="js/scripts.js"></script> -->
+    <script src="js/clock.js"></script>
 </body>
 
 </html>
